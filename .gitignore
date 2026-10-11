@@ -1,0 +1,31 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# Local environment and credential files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+
+# Logs, caches, dependencies, and generated build output
+*.log
+node_modules/
+.cache/
+dist/
+build/
+*.tmp
+*.bak
+*~
+
+# Original full-resolution master exceeds GitHub's 100 MiB regular-file limit.
+# Keep lure-full-web.mp4 and the other site videos tracked.
+/public/video/lure-full.mp4

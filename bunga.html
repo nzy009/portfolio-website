@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080908" />
+  <meta name="description" content="Bunga Raya (木槿) — an animated short set in 1940s Melaka by Ng Zi Ying." />
+  <title>Bunga Raya 木槿 — Ng Zi Ying</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="lure.css" />
+</head>
+<body>
+  <header class="lure-nav"><a href="index.html">← ALL WORK</a><span>NG ZI YING · 3D ANIMATED SHORT</span><a href="mailto:ngziying150009@gmail.com">CONTACT ↗</a></header>
+  <main>
+    <section class="lure-hero" aria-label="Bunga Raya environment still">
+      <img src="public/images/bunga-film-still-hero.png" alt="Bunga Raya character presenting a white flower" fetchpriority="high">
+      <div class="hero-label"><span>BUNGA RAYA</span><span>木槿 · 3D ANIMATED SHORT</span></div>
+      <a class="hero-down" href="#trailer" aria-label="Scroll to project film">↓</a>
+    </section>
+
+    <section class="trailer-section" id="trailer">
+      <p class="trailer-quote">Raise peace, drop war.</p>
+      <div class="trailer-frame" id="trailer-frame">
+        <video controls preload="metadata" playsinline poster="public/images/bunga-video-poster.png" aria-label="Bunga Raya award screening film">
+          <source src="public/video/bunga-raya-award.mp4" type="video/mp4">
+          Your browser does not support MP4 video. <a href="public/video/bunga-raya-award.mp4">Open the screening video</a>.
+        </video>
+        <span class="trailer-index">AWARD SCREENING</span>
+      </div>
+      <p class="film-description">A romance on a neighbourhood street in Melaka during World War II, told through warm interiors, lantern-lit evenings, and a flower passed from one person to another.</p>
+      <p class="film-description">Environment design, character design and modeling, animation, lighting, compositing, and rendering.</p>
+      <a class="youtube-link" href="https://www.bilibili.com/video/BV1RuNm6gEkh/?share_source=copy_web&amp;vd_source=22910cd66ce70803eeb57fc70398f3dd" target="_blank" rel="noreferrer">Watch the full film on Bilibili <span>↗</span></a>
+    </section>
+
+    <section class="stills-section" aria-label="Bunga Raya project visuals">
+      <div class="carousel" id="carousel">
+        <div class="carousel-track">
+          <figure class="slide"><img src="public/images/bunga-gallery-female.png" alt="Female character in embroidered blouse and floral skirt"><figcaption><span>01</span> FEMALE CHARACTER</figcaption></figure>
+          <figure class="slide"><img src="public/images/bunga-gallery-male.png" alt="Male character in a pale shirt and dark trousers"><figcaption><span>02</span> MALE CHARACTER</figcaption></figure>
+          <figure class="slide"><img src="public/images/bunga-gallery-hibiscus.jpg" alt="Hibiscus, embroidered slipper, and yellow pouch among the ruins"><figcaption><span>03</span> HIBISCUS IN THE RUINS</figcaption></figure>
+          <figure class="slide"><img src="public/images/bunga-gallery-village.jpg" alt="Village street in warm evening light"><figcaption><span>04</span> VILLAGE STREET</figcaption></figure>
+        </div>
+        <button class="carousel-arrow previous" type="button" aria-label="Previous image">←</button>
+        <button class="carousel-arrow next" type="button" aria-label="Next image">→</button>
+        <div class="carousel-dots" aria-label="Choose an image"></div>
+      </div>
+    </section>
+  </main>
+  <footer><a href="index.html">NG ZI YING</a><span>BUNGA RAYA · 3D ANIMATED SHORT</span><a href="mailto:ngziying150009@gmail.com">CONTACT ↗</a></footer>
+  <script>
+    (() => {
+      const carousel = document.querySelector('#carousel');
+      const track = carousel.querySelector('.carousel-track');
+      const slides = [...track.children];
+      const dots = carousel.querySelector('.carousel-dots');
+      let index = 0;
+      let timer;
+      const show = (next) => {
+        index = (next + slides.length) % slides.length;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        [...dots.children].forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
+      };
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button'; dot.setAttribute('aria-label', `Show image ${i + 1}`);
+        dot.addEventListener('click', () => { show(i); restart(); });
+        dots.append(dot);
+      });
+      const restart = () => { clearInterval(timer); timer = setInterval(() => show(index + 1), 2000); };
+      carousel.querySelector('.next').addEventListener('click', () => { show(index + 1); restart(); });
+      carousel.querySelector('.previous').addEventListener('click', () => { show(index - 1); restart(); });
+      carousel.addEventListener('mouseenter', () => clearInterval(timer));
+      carousel.addEventListener('mouseleave', restart);
+      carousel.addEventListener('focusin', () => clearInterval(timer));
+      carousel.addEventListener('focusout', restart);
+      let touchStart = 0;
+      carousel.addEventListener('touchstart', (event) => { touchStart = event.changedTouches[0].clientX; }, { passive: true });
+      carousel.addEventListener('touchend', (event) => {
+        const delta = event.changedTouches[0].clientX - touchStart;
+        if (Math.abs(delta) > 40) { show(index + (delta < 0 ? 1 : -1)); restart(); }
+      }, { passive: true });
+      show(0); restart();
+      document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) : restart());
+    })();
+  </script>
+</body>
+</html>
