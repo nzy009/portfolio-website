@@ -1,0 +1,130 @@
+.coffee-page {
+  background: #080908;
+}
+
+.coffee-intro {
+  min-height: 43vh;
+  padding: 72px 9.5vw 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1px solid #292a27;
+}
+
+.coffee-eyebrow {
+  font: 9px 'DM Mono', monospace;
+  letter-spacing: .14em;
+  color: #a8a79e;
+}
+
+.coffee-intro h1 {
+  font: 400 clamp(58px, 10vw, 126px)/.98 'IM Fell English', Georgia, serif;
+  letter-spacing: -.045em;
+  margin: 18px 0;
+  color: #f2f0eb;
+}
+
+.coffee-deck {
+  max-width: 500px;
+  color: #b4b4ad;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 10px auto 0;
+}
+
+.coffee-scroll {
+  margin-top: 35px;
+  font: 9px 'DM Mono', monospace;
+  letter-spacing: .08em;
+  color: #e9e6de;
+}
+
+.coffee-scroll span {
+  padding-left: 12px;
+  color: #cf795d;
+  font-size: 14px;
+}
+
+.coffee-gallery {
+  padding: 64px 7vw 100px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 34px 22px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.coffee-gallery figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.coffee-gallery img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #111210;
+  transition: transform .35s ease, filter .35s ease;
+}
+
+.coffee-gallery figure:hover img {
+  transform: translateY(-4px);
+  filter: brightness(1.04);
+}
+
+.coffee-gallery figcaption {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-top: 12px;
+  color: #aaa;
+  font: 8px 'DM Mono', monospace;
+  letter-spacing: .1em;
+}
+
+.coffee-gallery figcaption span {
+  color: #cf795d;
+}
+
+@media (max-width: 850px) {
+  .coffee-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 46px 6vw 72px;
+    gap: 26px 14px;
+  }
+
+  .coffee-intro {
+    min-height: 38vh;
+  }
+}
+
+@media (max-width: 520px) {
+  .coffee-gallery {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    gap: 25px;
+  }
+
+  .coffee-intro {
+    padding: 58px 6vw 44px;
+  }
+
+  .coffee-intro h1 {
+    font-size: 68px;
+  }
+
+  .coffee-deck {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coffee-gallery img {
+    transition: none;
+  }
+}
